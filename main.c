@@ -3,53 +3,74 @@
 #include <complex.h>
 #include <math.h>
 
-
-
-void sol (int a, int b, int c, double complex* x1, double complex* x2);
+int sol (int a, int b, int c, double complex* x1, double complex* x2);
+void print( int n, double complex* x1, double complex* x2);
 
 int main(int argc, char *argv[]){
 	
-	int a,b,c;
-	double complex x1, x2;
+	int a = 0;
+	int b = 0;
+	int c = 0;
+	int n = 0;
+	double complex x1 = 0;
+	double  = 0;
 	
 	a = atoi(argv[1]);
 	b = atoi(argv[2]);
 	c = atoi(argv[3]);
 	
-	sol(a, b, c, &x1, &x2);
-		
+	n = sol(a, b, c, &x1, &x2);
+	printf("If you want to print solution, press 'p'\n");
+	char p = getchar();
+	if (p == 'p')
+		print(n, &x1, &x2);
+
 	return 0;
 }
 
-void sol (int a, int b, int c, double complex* x1, double complex* x2){
+int sol (int a, int b, int c, double complex* x1, double complex* x2){
 	
-	double d;
+	double d = 0;
+	int n = 0;
 
 	d = b * b - 4 * a * c;
 	
 	if (d < 0){
 
+		n = -1;
 		*x1 = ( -b + I * sqrt(-d))/(2 * a);
 		*x2 = ( -b - I * sqrt(-d))/(2 * a);
-		printf("x1 = %.2f + i*%.2f\n", crealf(*x1), cimagf(*x1));
-		printf("x2 = %.2f + i*%.2f\n", crealf(*x2), cimagf(*x2));
 
 	}
 	else{
 		if (d > 0){
 		
+			n = 1;
 			*x1 = ( -b + sqrt(d))/(2 * a);
 			*x2 = ( -b - sqrt(d))/(2 * a);
-			printf("x1 = %.2f\n", crealf(*x1));
-			printf("x2 = %.2f\n", crealf(*x2));
 
 		}
 		else{
 			
+			n = 0;
 			*x1 = *x2 = -b/(2 * a);
-			printf("x1 = x2 = %.2f\n", crealf(*x1));
 	
 		}
+	} 
+
+	return n;
+}
+
+void print(int n, double complex* x1, double complex* x2){
+
+	if (n >= 0){
+		printf("x1 = %.2f\n", crealf(*x1));
+		printf("x2 = %.2f\n", crealf(*x2));       
 	}
+	else{
+		printf("x1 = %.2f + i*%.2f\n", crealf(*x1), cimagf(*x1));
+		printf("x2 = %.2f + i*%.2f\n", crealf(*x2), cimagf(*x2));
+	}
+		
 }
 
