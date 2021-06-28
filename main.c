@@ -4,6 +4,7 @@
 #include <math.h>
 
 
+
 void sol (int a, int b, int c, double complex* x1, double complex* x2);
 
 int main(int argc, char *argv[]){
